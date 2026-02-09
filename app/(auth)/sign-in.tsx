@@ -47,7 +47,8 @@ const Signin = () => {
         value={form.password}
         keyboardType="email-address"
       />
-      <Button title="Sign In" onPress={submit} />
+      <Button title="Sign In" onPress={submit} isLoading={isSubmitting}
+ />
 
       <View className="flex justify-center mt-5 flex-row gap-2">
         <Text className="base-regular text-gray-100">
