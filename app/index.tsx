@@ -11,6 +11,7 @@ import {
 import { images, offers } from "@/constants";
 import { Fragment } from "react";
 import cn from "clsx";
+import CartButton from "@/components/CartButton";
 
 export default function App() {
   return (
@@ -79,7 +80,7 @@ export default function App() {
               </TouchableOpacity>
             </View>
 
-            <Text>Cart</Text>
+            <CartButton />
           </View>
         )}
       />
