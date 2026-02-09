@@ -39,17 +39,8 @@ export default function _layout() {
             className="self-center size-48 absolute -bottom-16 z-10"
           />
         </View>
-
-        <InputBox
-          placeholder="Enter Your email"
-          label="Email"
-          onChangeText={(text) => {}}
-          value=""
-          keyboardType="email-address"
-        />
-        <Button />
+        <Slot />
       </ScrollView>
-      <Slot />
     </KeyboardAvoidingView>
   );
 }
