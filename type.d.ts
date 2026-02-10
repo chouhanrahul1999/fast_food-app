@@ -81,6 +81,7 @@ interface CustomInputProps {
     onChangeText?: (text: string) => void;
     label: string;
     secureTextEntry?: boolean;
+    decureTextEntry?: boolean;
     keyboardType?: "default" | "email-address" | "numeric" | "phone-pad";
 }
 

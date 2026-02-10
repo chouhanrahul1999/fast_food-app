@@ -60,9 +60,9 @@ const Signup = () => {
           setForm((prev) => ({ ...prev, password: text }))
         }
         value={form.password}
-        keyboardType="email-address"
+        secureTextEntry={true}
       />
-      <Button title="Sign In" onPress={submit} isLoading={isSubmitting} />
+      <Button title="Sign Up" onPress={submit} isLoading={isSubmitting} />
 
       <View className="flex justify-center mt-5 flex-row gap-2">
         <Text className="base-regular text-gray-100">
