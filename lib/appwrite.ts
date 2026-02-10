@@ -1,5 +1,4 @@
-import Signin from "@/app/(auth)/sign-in";
-import { CreateUserParams, SignInParams } from "@/type";
+import { CreateUserParams, SignInParams, User } from "@/type";
 import {
   Account,
   Avatars,
@@ -82,7 +81,7 @@ export const getCurrentUser = async () => {
 
     if (!currentUser) throw Error;
 
-    return currentUser.documents[0];
+    return currentUser.documents[0] as unknown as User;
   } catch (error) {
     console.log(error);
     throw new Error(error as string);
