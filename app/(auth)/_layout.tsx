@@ -11,14 +11,12 @@ import {
 import React from "react";
 import { Slot } from "expo-router";
 import { images } from "@/constants";
-import InputBox from "@/components/InputBox";
-import Button from "@/components/Button";
-import { text } from "express";
+
 
 export default function _layout() {
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      // behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView
         className="bg-white h-full"
