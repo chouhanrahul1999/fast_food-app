@@ -1,4 +1,4 @@
-import { CreateUserParams, SignInParams, User } from "@/type";
+import { CreateUserParams, GetMenuParams, SignInParams, User } from "@/type";
 import {
   Account,
   Avatars,
@@ -21,7 +21,7 @@ export const appwriteConfig = {
     process.env.EXPO_PUBLIC_APPWRITE_CUSTOMIZATION_COLLECTION_ID!,
   menuCustomizationCollectionId:
     process.env.EXPO_PUBLIC_APPWRITE_MENU_CUSTOMIZATION_COLLECTION_ID!,
-    bucketId: process.env.EXPO_PUBLIC_APPWRITE_BUCKET_ID!
+  bucketId: process.env.EXPO_PUBLIC_APPWRITE_BUCKET_ID!,
 };
 
 export const client = new Client();
@@ -93,6 +93,38 @@ export const getCurrentUser = async () => {
     return currentUser.documents[0] as unknown as User;
   } catch (error) {
     console.log(error);
+    throw new Error(error as string);
+  }
+};
+
+export const getMenu = async ({ category, query }: GetMenuParams) => {
+  try {
+    const queris: string[] = [];
+
+    if (category) queris.push(Query.equal("categories", category));
+    if (query) queris.push(Query.search("name", query));
+
+    const menus = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.menuCollectionId,
+      queris,
+    );
+
+    return menus.documents;
+  } catch (error) {
+    throw new Error(error as string);
+  }
+};
+
+export const getCategories = async () => {
+  try {
+    const categories = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.categoriesCollectionId,
+    );
+
+    return categories.documents;
+  } catch (error) {
     throw new Error(error as string);
   }
 };
