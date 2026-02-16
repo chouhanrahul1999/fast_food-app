@@ -21,7 +21,7 @@ const Search = () => {
   const { data, refetch, loading } = useAppwrite({
     fn: getMenu,
     params: {
-      category,
+      category: categoryId,
       query,
       limit: 6,
     },
@@ -29,9 +29,13 @@ const Search = () => {
 
   const { data: categories } = useAppwrite({ fn: getCategories });
 
+  const categoryId = categories?.find(
+    (cat: any) => cat.name === category
+  )?.$id;
+
   useEffect(() => {
-    refetch({ category, query, limit: 6 });
-  }, [query, category]);
+    refetch({ category: categoryId, query, limit: 6 });
+  }, [query, categoryId]);
 
   return (
     <SafeAreaView className="bg-white h-full">

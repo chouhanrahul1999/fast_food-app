@@ -12,6 +12,7 @@ import { Fragment } from "react";
 import cn from "clsx";
 import CartButton from "@/components/CartButton";
 import useAuthStore from "@/store/auth.store";
+import { router } from "expo-router";
 
 export default function App() {
   const { user } = useAuthStore();
@@ -33,6 +34,7 @@ export default function App() {
                 )}
                 style={{ backgroundColor: item.color }}
                 android_ripple={{ color: "#fffff22" }}
+                onPress={() => router.push(`/Search?category=${item.category}`)}
               >
                 {({ pressed }) => (
                   <Fragment>
