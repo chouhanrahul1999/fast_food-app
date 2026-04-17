@@ -20,7 +20,8 @@ export default function AuthLayout() {
 
   return (
     <KeyboardAvoidingView
-    // behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
     >
       <ScrollView
         className="bg-white h-full"

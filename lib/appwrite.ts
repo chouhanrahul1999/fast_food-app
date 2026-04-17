@@ -70,6 +70,9 @@ export const createUser = async ({
 
 export const signIn = async ({ email, password }: SignInParams) => {
   try {
+    try {
+      await account.deleteSession("current");
+    } catch (_) {}
     const session = await account.createEmailPasswordSession(email, password);
     return session;
   } catch (error) {
@@ -80,7 +83,7 @@ export const signIn = async ({ email, password }: SignInParams) => {
 export const getCurrentUser = async () => {
   try {
     const currentAccount = await account.get();
-    if (!currentAccount) throw new Error("No account found");
+    if (!currentAccount) return null;
 
     const currentUser = await databases.listDocuments(
       appwriteConfig.databaseId!,
@@ -88,12 +91,12 @@ export const getCurrentUser = async () => {
       [Query.equal("accountId", currentAccount.$id)],
     );
 
-    if (!currentUser) throw Error;
+    if (!currentUser || currentUser.documents.length === 0) return null;
 
     return currentUser.documents[0] as unknown as User;
   } catch (error) {
-    console.log(error);
-    throw new Error(error as string);
+    console.log("getCurrentUser error:", error);
+    return null;
   }
 };
 
